@@ -44,15 +44,6 @@ $('importBtn').onclick = function () {
   fileInput.click();
 };
 
-$('excelFile').onchange = function () {
-  const file = this.files && this.files[0];
-
-  if (file) {
-    status('Файл выбран: ' + file.name + '. Начинаем импорт...');
-  } else {
-    status('Файл не выбран. Попробуй ещё раз.');
-  }
-};
 function normHeader(v){return String(v??'').trim().toLowerCase().replace(/[ё]/g,'е').replace(/[\s_\-\.]+/g,'')}
 function pick(row, aliases){for(const k of Object.keys(row)){if(aliases.includes(normHeader(k)))return row[k]}return ''}
 function excelTime(v){if(v instanceof Date)return v.toTimeString().slice(0,5);if(typeof v==='number'&&v>=0&&v<1){const mins=Math.round(v*1440);return String(Math.floor(mins/60)).padStart(2,'0')+':'+String(mins%60).padStart(2,'0')}let s=String(v??'').trim();if(/^\d{1,2}:\d{2}(:\d{2})?$/.test(s))return s.slice(0,5);if(/^\d{1,2}\.\d{2}$/.test(s))return s.replace('.',':');return s}
